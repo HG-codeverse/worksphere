@@ -43,9 +43,10 @@ def register_organization(form):
         db.session.rollback()
         return False, "Database Error"
 
-    except Exception:
+    except Exception as e:
         db.session.rollback()
-        return False, "Something went wrong"
+        print(e)
+        return False, str(e)
     
 from flask_jwt_extended import create_access_token
 
