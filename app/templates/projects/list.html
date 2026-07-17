@@ -2,53 +2,101 @@
 
 {% block content %}
 
-<div class="container mt-5">
+<div class="container mt-4">
 
-    <h2>Projects</h2>
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
 
-    <a href="{{ url_for('projects.create') }}" class="btn btn-success mb-3">
-        + New Project
-    </a>
+        <h2 class="ws-page-title mb-0">Projects</h2>
 
-    <table class="table table-bordered">
+        <a href="{{ url_for('projects.create') }}" class="btn btn-success">
+            + New Project
+        </a>
 
-        <thead>
+    </div>
 
-            <tr>
-                <th>Name</th>
-                <th>Status</th>
-                <th>Created</th>
-            </tr>
+    <form method="GET" class="ws-search-form mb-4">
 
-        </thead>
+        <input
+            type="text"
+            name="search"
+            value="{{ search }}"
+            class="form-control"
+            placeholder="Search Projects"
+        >
 
-        <tbody>
+        <button type="submit" class="btn btn-primary">
+            Search
+        </button>
 
-        {% for project in projects %}
+    </form>
 
-            <tr>
+    <div class="ws-table-wrap">
 
-                <td>{{ project.name }}</td>
+        <div class="table-responsive ws-table-responsive">
 
-                <td>{{ project.status }}</td>
+            <table class="table table-striped table-hover align-middle mb-0">
 
-                <td>{{ project.created_at.strftime("%d-%m-%Y") }}</td>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
 
-            </tr>
+                <tbody>
 
-        {% else %}
+                {% for project in projects %}
 
-            <tr>
-                <td colspan="3" class="text-center">
-                    No Projects Found
-                </td>
-            </tr>
+                    <tr>
 
-        {% endfor %}
+                        <td><strong>{{ project.name }}</strong></td>
 
-        </tbody>
+                        <td>
+                            {% if project.status.lower() == 'completed' %}
+                                <span class="ws-badge ws-badge-completed">Completed</span>
+                            {% elif project.status.lower() == 'pending' %}
+                                <span class="ws-badge ws-badge-pending">Pending</span>
+                            {% else %}
+                                <span class="badge-soft badge-soft-secondary">{{ project.status }}</span>
+                            {% endif %}
+                        </td>
 
-    </table>
+                        <td>{{ project.created_at.strftime("%d-%m-%Y") }}</td>
+
+                        <td>
+                            <a class="btn btn-sm btn-warning"
+                               href="{{ url_for('projects.edit', project_id=project.id) }}">
+                                Edit
+                            </a>
+
+                            <a class="btn btn-sm btn-danger"
+                               onclick="return confirm('Delete this project?')"
+                               href="{{ url_for('projects.delete', project_id=project.id) }}">
+                                Delete
+                            </a>
+                        </td>
+
+                    </tr>
+
+                {% else %}
+
+                    <tr>
+                        <td colspan="4" class="text-center ws-empty">
+                            No Projects Found
+                        </td>
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
 
 </div>
 

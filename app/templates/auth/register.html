@@ -2,44 +2,87 @@
 
 {% block content %}
 
-<h2>Register</h2>
+<div class="ws-auth-wrapper">
 
-<form method="POST">
+    <span class="ws-auth-shape"></span>
+    <span class="ws-auth-shape ws-auth-shape-2"></span>
 
-{{ form.hidden_tag() }}
+    <div class="ws-auth-card">
 
-{{ form.company_name.label }}
-{{ form.company_name }}
+        <div class="ws-auth-header">
 
-<br><br>
+            <div class="ws-auth-logo">&#9673;</div>
 
-{{ form.company_email.label }}
-{{ form.company_email }}
+            <h3>Create Account</h3>
 
-<br><br>
+            <p>Set up your organization on WorkSphere</p>
 
-{{ form.admin_name.label }}
-{{ form.admin_name }}
+        </div>
 
-<br><br>
+        <div class="ws-auth-body">
 
-{{ form.admin_email.label }}
-{{ form.admin_email }}
+            <form method="POST" novalidate>
 
-<br><br>
+                {{ form.hidden_tag() }}
 
-{{ form.password.label }}
-{{ form.password }}
+                <div class="mb-3">
+                    {{ form.company_name.label(class="form-label") }}
+                    {{ form.company_name(class="form-control" + (" is-invalid" if form.company_name.errors else ""), placeholder="Acme Inc.") }}
+                    {% for error in form.company_name.errors %}
+                        <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                </div>
 
-<br><br>
+                <div class="mb-3">
+                    {{ form.company_email.label(class="form-label") }}
+                    {{ form.company_email(class="form-control" + (" is-invalid" if form.company_email.errors else ""), placeholder="company@example.com") }}
+                    {% for error in form.company_email.errors %}
+                        <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                </div>
 
-{{ form.confirm_password.label }}
-{{ form.confirm_password }}
+                <div class="mb-3">
+                    {{ form.admin_name.label(class="form-label") }}
+                    {{ form.admin_name(class="form-control" + (" is-invalid" if form.admin_name.errors else ""), placeholder="John Doe") }}
+                    {% for error in form.admin_name.errors %}
+                        <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                </div>
 
-<br><br>
+                <div class="mb-3">
+                    {{ form.admin_email.label(class="form-label") }}
+                    {{ form.admin_email(class="form-control" + (" is-invalid" if form.admin_email.errors else ""), placeholder="admin@example.com") }}
+                    {% for error in form.admin_email.errors %}
+                        <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                </div>
 
-{{ form.submit }}
+                <div class="mb-3">
+                    {{ form.password.label(class="form-label") }}
+                    {{ form.password(class="form-control" + (" is-invalid" if form.password.errors else ""), placeholder="Create a password") }}
+                    {% for error in form.password.errors %}
+                        <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                </div>
 
-</form>
+                <div class="mb-3">
+                    {{ form.confirm_password.label(class="form-label") }}
+                    {{ form.confirm_password(class="form-control" + (" is-invalid" if form.confirm_password.errors else ""), placeholder="Confirm password") }}
+                    {% for error in form.confirm_password.errors %}
+                        <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="d-grid mt-4">
+                    {{ form.submit(class="btn btn-primary btn-lg") }}
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
 
 {% endblock %}

@@ -2,19 +2,174 @@
 
 {% block content %}
 
+<div class="container">
+
+    <h2 class="ws-page-title mb-4">Dashboard</h2>
+
+    <div class="row g-4 mb-4">
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card ws-stat-card h-100 p-4">
+                <div class="ws-stat-icon" style="background: linear-gradient(135deg, #4f46e5, #6366f1);">
+                    &#128193;
+                </div>
+                <div class="ws-stat-value">{{ total_projects }}</div>
+                <p class="ws-stat-label">Total Projects</p>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card ws-stat-card h-100 p-4">
+                <div class="ws-stat-icon" style="background: linear-gradient(135deg, #7c3aed, #a855f7);">
+                    &#9989;
+                </div>
+                <div class="ws-stat-value">{{ total_tasks }}</div>
+                <p class="ws-stat-label">Total Tasks</p>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card ws-stat-card h-100 p-4">
+                <div class="ws-stat-icon" style="background: linear-gradient(135deg, #059669, #10b981);">
+                    &#127881;
+                </div>
+                <div class="ws-stat-value">{{ completed_tasks }}</div>
+                <p class="ws-stat-label">Completed</p>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card ws-stat-card h-100 p-4">
+                <div class="ws-stat-icon" style="background: linear-gradient(135deg, #d97706, #f59e0b);">
+                    &#9203;
+                </div>
+                <div class="ws-stat-value">{{ pending_tasks }}</div>
+                <p class="ws-stat-label">Pending</p>
+            </div>
+        </div>
+
+    </div>
+
+    <hr class="my-4" style="opacity: 0.3;">
+
+    <div class="row g-4">
+
+        <div class="col-12 col-lg-6">
+
+            <h4 class="ws-section-title">Recent Projects</h4>
+
+            <div class="card ws-card">
+                <ul class="list-group list-group-flush">
+
+                    {% for project in recent_projects %}
+
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>{{ project.name }}</strong>
+                            <div class="text-muted small">{{ project.status }}</div>
+                        </div>
+                        <span class="badge-soft badge-soft-secondary">{{ project.status }}</span>
+                    </li>
+
+                    {% else %}
+
+                    <li class="list-group-item ws-empty">
+                        No Projects Yet
+                    </li>
+
+                    {% endfor %}
+
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="col-12 col-lg-6">
+
+            <h4 class="ws-section-title">Recent Tasks</h4>
+
+            <div class="card ws-card">
+                <ul class="list-group list-group-flush">
+
+                    {% for task in recent_tasks %}
+
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>{{ task.title }}</strong>
+                            <div class="text-muted small">{{ task.status }}</div>
+                        </div>
+                        {% if task.status.lower() == 'completed' %}
+                            <span class="ws-badge ws-badge-completed">Completed</span>
+                        {% elif task.status.lower() == 'pending' %}
+                            <span class="ws-badge ws-badge-pending">Pending</span>
+                        {% else %}
+                            <span class="badge-soft badge-soft-secondary">{{ task.status }}</span>
+                        {% endif %}
+                    </li>
+
+                    {% else %}
+
+                    <li class="list-group-item ws-empty">
+                        No Tasks Yet
+                    </li>
+
+                    {% endfor %}
+
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 <div class="container mt-5">
 
-    <h1>Dashboard</h1>
+    <h3 class="ws-section-title">Recent Activity</h3>
 
-    <hr>
+    <div class="ws-table-wrap">
 
-    <a href="{{ url_for('projects.create') }}" class="btn btn-primary">
-        Create Project
-    </a>
+        <div class="table-responsive ws-table-responsive">
 
-    <a href="{{ url_for('projects.list_projects') }}" class="btn btn-success">
-        View Projects
-    </a>
+            <table class="table table-striped table-hover align-middle mb-0">
+
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                {% for activity in activities %}
+
+                    <tr>
+                        <td>
+                            <span class="me-2">&#9889;</span>
+                            {{ activity.action }}
+                        </td>
+                        <td class="ws-activity-time">
+                            {{ activity.created_at.strftime("%d-%m-%Y %H:%M") }}
+                        </td>
+                    </tr>
+
+                {% else %}
+
+                    <tr>
+                        <td colspan="2" class="ws-empty">No Activity Yet</td>
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
 
 </div>
 

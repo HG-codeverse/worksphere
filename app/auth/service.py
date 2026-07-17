@@ -62,5 +62,6 @@ def login_user(form):
         return False, "Invalid Credentials", None
 
     token = create_access_token(identity=str(user.id))
-
+    
+    
     return True, "Login Successful", token

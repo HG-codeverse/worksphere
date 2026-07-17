@@ -1,0 +1,543 @@
+:root {
+    --ws-primary: #4f46e5;
+    --ws-primary-dark: #4338ca;
+    --ws-primary-light: #6366f1;
+    --ws-secondary: #7c3aed;
+    --ws-accent: #8b5cf6;
+    --ws-bg: #f4f6fb;
+    --ws-surface: #ffffff;
+    --ws-text: #1e293b;
+    --ws-muted: #64748b;
+    --ws-border: #e2e8f0;
+    --ws-shadow: 0 4px 20px rgba(79, 70, 229, 0.08);
+    --ws-shadow-hover: 0 10px 30px rgba(79, 70, 229, 0.18);
+    --ws-radius: 16px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--ws-bg);
+    color: var(--ws-text);
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main,
+.ws-main {
+    flex: 1 0 auto;
+}
+
+/* ---------- Navbar ---------- */
+.ws-navbar {
+    background: linear-gradient(135deg, var(--ws-primary) 0%, var(--ws-secondary) 100%) !important;
+    box-shadow: 0 4px 20px rgba(79, 70, 229, 0.25);
+    padding: 0.75rem 0;
+}
+
+.ws-navbar .navbar-brand {
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.ws-navbar .navbar-brand .ws-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.18);
+    font-size: 1.1rem;
+}
+
+.ws-navbar .nav-link,
+.ws-navbar .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-weight: 500;
+    padding: 0.5rem 0.9rem !important;
+    border-radius: 10px;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.ws-navbar .nav-link:hover,
+.ws-navbar .navbar-nav .nav-link:hover {
+    color: #fff !important;
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+}
+
+.ws-navbar .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.ws-navbar .navbar-toggler:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+}
+
+.ws-navbar .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.ws-btn-ghost {
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #fff !important;
+    background: transparent;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.ws-btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+}
+
+/* ---------- Page headings ---------- */
+.ws-page-title {
+    font-weight: 700;
+    color: var(--ws-text);
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.6rem;
+}
+
+.ws-page-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 56px;
+    height: 4px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--ws-primary), var(--ws-accent));
+}
+
+/* ---------- Cards ---------- */
+.ws-card {
+    background: var(--ws-surface);
+    border: 1px solid var(--ws-border);
+    border-radius: var(--ws-radius);
+    box-shadow: var(--ws-shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ws-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--ws-shadow-hover);
+}
+
+.ws-stat-card {
+    border-radius: var(--ws-radius);
+    border: none;
+    background: linear-gradient(135deg, var(--ws-surface) 0%, #fafbff 100%);
+    box-shadow: var(--ws-shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.ws-stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ws-shadow-hover);
+}
+
+.ws-stat-card .ws-stat-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 0.75rem;
+}
+
+.ws-stat-card .ws-stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--ws-text);
+}
+
+.ws-stat-card .ws-stat-label {
+    color: var(--ws-muted);
+    font-size: 0.9rem;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+    border-radius: 10px;
+    font-weight: 500;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.25);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--ws-primary), var(--ws-primary-light));
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--ws-primary-dark), var(--ws-primary));
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #059669, #10b981);
+    border: none;
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #d97706, #f59e0b);
+    border: none;
+    color: #fff;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #dc2626, #ef4444);
+    border: none;
+}
+
+.btn-sm {
+    border-radius: 8px;
+}
+
+/* ---------- Forms ---------- */
+.form-control,
+.form-select {
+    border-radius: 10px;
+    border: 1px solid var(--ws-border);
+    padding: 0.55rem 0.85rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--ws-primary);
+    box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.15);
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--ws-text);
+    margin-bottom: 0.35rem;
+}
+
+.form-control.is-invalid,
+.form-select.is-invalid {
+    border-color: #f43f5e;
+}
+
+.invalid-feedback {
+    font-size: 0.85rem;
+}
+
+/* ---------- Tables ---------- */
+.ws-table-wrap {
+    background: var(--ws-surface);
+    border-radius: var(--ws-radius);
+    box-shadow: var(--ws-shadow);
+    overflow: hidden;
+    border: 1px solid var(--ws-border);
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table > :not(caption) > * > * {
+    padding: 0.9rem 1rem;
+}
+
+.table thead th {
+    background: linear-gradient(135deg, var(--ws-primary), var(--ws-secondary));
+    color: #fff;
+    font-weight: 600;
+    border-bottom: none;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    letter-spacing: 0.5px;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+    background-color: #f8fafc;
+}
+
+.table-hover > tbody > tr:hover > * {
+    background-color: #eef2ff;
+    transition: background 0.15s ease;
+}
+
+.ws-table-responsive {
+    border-radius: var(--ws-radius);
+}
+
+/* ---------- Badges ---------- */
+.ws-badge {
+    font-weight: 600;
+    padding: 0.4em 0.8em;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    display: inline-block;
+    line-height: 1;
+}
+
+.ws-badge-completed {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.ws-badge-pending {
+    background: #fef9c3;
+    color: #854d0e;
+}
+
+.ws-badge-high {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.badge-soft {
+    font-weight: 600;
+    padding: 0.4em 0.75em;
+    border-radius: 999px;
+    font-size: 0.75rem;
+}
+
+.badge-soft-primary { background: #e0e7ff; color: #4338ca; }
+.badge-soft-secondary { background: #ede9fe; color: #6d28d9; }
+.badge-soft-info { background: #cffafe; color: #0e7490; }
+.badge-soft-success { background: #dcfce7; color: #166534; }
+.badge-soft-warning { background: #fef9c3; color: #854d0e; }
+.badge-soft-danger { background: #fee2e2; color: #991b1b; }
+
+/* ---------- List groups ---------- */
+.list-group-item {
+    border-color: var(--ws-border);
+    transition: background 0.15s ease;
+}
+
+.list-group-item:hover {
+    background: #eef2ff;
+}
+
+/* ---------- Auth pages ---------- */
+.ws-auth-wrapper {
+    position: relative;
+    flex: 1 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+    overflow: hidden;
+    background: linear-gradient(135deg, #eef2ff 0%, #faf5ff 50%, #f5f3ff 100%);
+}
+
+/* Decorative blurred shapes filling the blank spaces */
+.ws-auth-wrapper::before,
+.ws-auth-wrapper::after,
+.ws-auth-shape {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.55;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.ws-auth-wrapper::before {
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle at 30% 30%, #818cf8, #6366f1);
+    top: -120px;
+    left: -120px;
+}
+
+.ws-auth-wrapper::after {
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle at 70% 70%, #c084fc, #a855f7);
+    bottom: -130px;
+    right: -110px;
+}
+
+.ws-auth-shape {
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle at 50% 50%, #a5b4fc, #7c3aed);
+    top: 45%;
+    right: 8%;
+}
+
+.ws-auth-shape.ws-auth-shape-2 {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle at 50% 50%, #c4b5fd, #6366f1);
+    bottom: 12%;
+    left: 6%;
+}
+
+.ws-auth-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 460px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 22px;
+    box-shadow: 0 24px 60px rgba(79, 70, 229, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    overflow: hidden;
+    animation: ws-auth-pop 0.5s ease;
+}
+
+@keyframes ws-auth-pop {
+    from { opacity: 0; transform: translateY(18px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.ws-auth-header {
+    position: relative;
+    background: linear-gradient(135deg, var(--ws-primary), var(--ws-secondary));
+    color: #fff;
+    padding: 2.25rem 2rem 1.75rem;
+    text-align: center;
+    overflow: hidden;
+}
+
+.ws-auth-header::after {
+    content: "";
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+    top: -60px;
+    right: -50px;
+    filter: blur(10px);
+}
+
+.ws-auth-header .ws-auth-logo {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 0.85rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.ws-auth-header h3 {
+    position: relative;
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.3px;
+}
+
+.ws-auth-header p {
+    position: relative;
+    margin: 0.4rem 0 0;
+    opacity: 0.9;
+    font-size: 0.92rem;
+}
+
+.ws-auth-body {
+    padding: 2rem;
+}
+
+.ws-auth-body .form-control,
+.ws-auth-body .form-select {
+    margin-bottom: 0.25rem;
+    background: #fbfcff;
+}
+
+.ws-auth-body .form-control:focus,
+.ws-auth-body .form-select:focus {
+    background: #fff;
+}
+
+/* ---------- Search form ---------- */
+.ws-search-form {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.ws-search-form input {
+    flex: 1 1 240px;
+}
+
+/* ---------- Empty state ---------- */
+.ws-empty {
+    padding: 2rem;
+    text-align: center;
+    color: var(--ws-muted);
+    background: #f8fafc;
+}
+
+/* ---------- Footer ---------- */
+.ws-footer {
+    flex-shrink: 0;
+    background: linear-gradient(135deg, var(--ws-primary) 0%, var(--ws-secondary) 100%);
+    color: rgba(255, 255, 255, 0.9);
+    padding: 1.5rem 0;
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.ws-footer a {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.ws-footer a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- Utilities ---------- */
+.ws-section-title {
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--ws-text);
+}
+
+.ws-activity-time {
+    white-space: nowrap;
+    color: var(--ws-muted);
+    font-size: 0.88rem;
+}
+
+@media (max-width: 768px) {
+    .ws-stat-card .ws-stat-value {
+        font-size: 1.6rem;
+    }
+    .ws-page-title {
+        font-size: 1.5rem;
+    }
+}

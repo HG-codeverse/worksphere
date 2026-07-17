@@ -9,6 +9,9 @@ from app.auth.service import login_user
 from flask_jwt_extended import set_access_cookies
 from flask import make_response
 
+
+from flask_jwt_extended import unset_jwt_cookies
+from flask import make_response
 auth_bp = Blueprint("auth", __name__)
 
 
@@ -58,3 +61,17 @@ def login():
         "auth/login.html",
         form=form
     )
+
+
+@auth_bp.route("/logout")
+def logout():
+
+    response = make_response(
+        redirect(url_for("auth.login"))
+    )
+
+    unset_jwt_cookies(response)
+
+    flash("Logged out successfully")
+
+    return response
