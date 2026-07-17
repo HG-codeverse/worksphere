@@ -16,3 +16,4 @@ class Config:
     MAX_CONTENT_LENGTH = int(os.getenv("MAX_CONTENT_LENGTH"))
 
     DEBUG = os.getenv("DEBUG") == "True"
+    WTF_CSRF_ENABLED = True 
