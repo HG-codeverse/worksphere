@@ -6,12 +6,15 @@ from app.auth.service import register_organization
 from app.auth.forms import LoginForm
 from app.auth.service import login_user
 
+from flask_jwt_extended import set_access_cookies
+from flask import make_response
+
 auth_bp = Blueprint("auth", __name__)
 
 
 @auth_bp.route("/")
 def home():
-    return redirect(url_for("auth.register"))
+    return redirect(url_for("auth.login"))
 
 
 @auth_bp.route("/register", methods=["GET", "POST"])
@@ -43,10 +46,13 @@ def login():
         flash(message)
 
         if success:
-            return render_template(
-                "dashboard/dashboard.html",
-                token=token
+            response = make_response(
+                redirect(url_for("dashboard.dashboard"))
             )
+
+            set_access_cookies(response, token)
+
+            return response
 
     return render_template(
         "auth/login.html",

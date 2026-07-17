@@ -2,12 +2,20 @@
 
 {% block content %}
 
-<h1>Welcome to WorkSphere 🚀</h1>
+<div class="container mt-5">
 
-<h3>Login Successful</h3>
+    <h1>Dashboard</h1>
 
-<p>Your JWT Token:</p>
+    <hr>
 
-<textarea rows="10" cols="90">{{ token }}</textarea>
+    <a href="{{ url_for('projects.create') }}" class="btn btn-primary">
+        Create Project
+    </a>
+
+    <a href="{{ url_for('projects.list_projects') }}" class="btn btn-success">
+        View Projects
+    </a>
+
+</div>
 
 {% endblock %}

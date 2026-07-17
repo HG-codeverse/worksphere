@@ -1,4 +1,6 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
+
+from flask_jwt_extended import jwt_required
 
 dashboard_bp = Blueprint(
     "dashboard",
@@ -8,5 +10,9 @@ dashboard_bp = Blueprint(
 
 
 @dashboard_bp.route("/")
+@jwt_required()
 def dashboard():
-    return "Dashboard"
+
+    return render_template(
+        "dashboard/dashboard.html"
+    )

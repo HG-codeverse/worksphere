@@ -1,7 +1,8 @@
-from datetime import datetime
+from datetime import datetime, UTC
+
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from app.models import db
+from app.extensions import db
 from app.utils.constants import UserRole
 
 
@@ -16,11 +17,21 @@ class User(db.Model):
         nullable=False
     )
 
-    name = db.Column(db.String(100), nullable=False)
+    name = db.Column(
+        db.String(100),
+        nullable=False
+    )
 
-    email = db.Column(db.String(120), unique=True, nullable=False)
+    email = db.Column(
+        db.String(120),
+        unique=True,
+        nullable=False
+    )
 
-    password_hash = db.Column(db.String(255), nullable=False)
+    password_hash = db.Column(
+        db.String(255),
+        nullable=False
+    )
 
     role = db.Column(
         db.Enum(UserRole),
@@ -30,13 +41,30 @@ class User(db.Model):
 
     is_active = db.Column(
         db.Boolean,
-        default=True
+        default=True,
+        nullable=False
     )
 
     created_at = db.Column(
-        db.DateTime,
-        default=datetime.utcnow
+        db.DateTime(timezone=True),
+        default=lambda: datetime.now(UTC)
     )
+
+    projects = db.relationship(
+        "Project",
+        foreign_keys="Project.created_by",
+        backref="creator",
+        lazy=True
+    )
+
+
+    tasks = db.relationship(
+    "Task",
+    foreign_keys="Task.assigned_to",
+    backref="assignee",
+    lazy=True
+    )
+
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)

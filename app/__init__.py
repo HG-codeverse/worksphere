@@ -13,15 +13,20 @@ def create_app():
     migrate.init_app(app, db)
     jwt.init_app(app)
 
-    from app.models import Organization, User
+    # Import models
+    from app.models import Organization, User, Project
 
+    # Import blueprints
     from app.auth.routes import auth_bp
     from app.dashboard.routes import dashboard_bp
+    from app.projects.routes import project_bp
 
+    # Register blueprints
     app.register_blueprint(auth_bp)
     app.register_blueprint(dashboard_bp)
+    app.register_blueprint(project_bp)
 
-    # TEMPORARY: Create tables automatically if they don't exist
+    # Temporary for Render Free
     with app.app_context():
         db.create_all()
 
